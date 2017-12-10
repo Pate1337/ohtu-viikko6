@@ -24,7 +24,27 @@ public class Main {
 //                new HasAtLeast(60, "assists"),
 //                new HasAtLeast(85, "points")
 //        );
-        Matcher m = new HasFewerThan(1, "goals");
+//        Matcher m = new HasFewerThan(1, "goals");
+        QueryBuilder query = new QueryBuilder();
+
+//        Matcher m = query.playsIn("NYR")
+//                .hasAtLeast(10, "goals")
+//                .hasFewerThan(25, "goals").build();
+//        Matcher m1 = query.playsIn("PHI")
+//                .hasAtLeast(10, "goals")
+//                .hasFewerThan(20, "assists").build();
+//
+//        Matcher m2 = query.playsIn("EDM")
+//                .hasAtLeast(60, "points").build();
+//
+//        Matcher m = query.oneOf(m1, m2).build();
+        Matcher m = query.oneOf(
+                query.playsIn("PHI")
+                        .hasAtLeast(10, "goals")
+                        .hasFewerThan(20, "assists").build(),
+                query.playsIn("EDM")
+                        .hasAtLeast(60, "points").build()
+        ).build();
 
         for (Player player : stats.matches(m)) {
             System.out.println(player);
